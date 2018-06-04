@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --exit",
-    "coverage": "cross-env NODE_ENV=test nyc mocha"
+    "coverage": "cross-env NODE_ENV=test nyc mocha",
+    "compile": "cross-env NODE_ENV=production babel -d lib/ src/"
   },
   "repository": {
     "type": "git",
