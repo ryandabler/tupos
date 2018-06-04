@@ -1,8 +1,8 @@
-const types = require("constants");
+const types = require("./constants");
 const {
     typeOf,
     isIterable
-} = require("tupos");
+} = require("./tupos");
 
 module.exports = {
     types,
