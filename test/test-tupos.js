@@ -63,4 +63,8 @@ describe("isIterable()", function() {
             expect(result).to.be.false;
         });
     });
+
+    it("Should return false when no arguments are supplied passed", function() {
+        expect(isIterable()).to.be.false;
+    });
 });
