@@ -4,7 +4,8 @@
   "description": "A type-checking library",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --exit"
+    "test": "mocha --exit",
+    "coverage": "cross-env NODE_ENV=test nyc mocha"
   },
   "repository": {
     "type": "git",
@@ -26,7 +27,7 @@
     "nyc": "^12.0.2"
   },
   "babel": {
-    "present": [
+    "presets": [
       "env"
     ],
     "env": {
