@@ -56,6 +56,7 @@ describe("isIterable()", function() {
             1,
             {a: 1},
             () => {},
+            null
         ];
         const results = objectsToTest.map(isIterable);
 
