@@ -1,3 +1,5 @@
+const types = require("./constants");
+
 /**
  * Determines the type of any JavaScript element.
  * 
@@ -19,7 +21,7 @@ const typeOf = obj =>
  * @returns {boolean}
  */
 const isIterable = obj =>
-    obj ? typeOf(obj[Symbol.iterator]) === constants.TYPE_FUNCTION : false
+    obj ? typeOf(obj[Symbol.iterator]) === types.FUNCTION : false
 
 module.exports = {
     typeOf,
