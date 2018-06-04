@@ -2,7 +2,7 @@
   "name": "tupos",
   "version": "1.0.0",
   "description": "A type-checking library",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "mocha --exit",
     "coverage": "cross-env NODE_ENV=test nyc mocha",
