@@ -1,0 +1,19 @@
+{
+  "name": "tupos",
+  "version": "1.0.0",
+  "description": "A type-checking library",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --exit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryandabler/tupos.git"
+  },
+  "author": "Ryan Dabler <r.p.dabler@gmail.com> (https://ryandabler.github.io)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ryandabler/tupos/issues"
+  },
+  "homepage": "https://github.com/ryandabler/tupos#readme"
+}
