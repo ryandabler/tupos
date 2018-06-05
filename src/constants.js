@@ -1,3 +1,5 @@
+"use strict";
+
 const FUNCTION = "Function";
 const OBJECT = "Object";
 const NUMBER = "Number";

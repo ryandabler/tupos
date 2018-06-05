@@ -1,3 +1,5 @@
+"use strict";
+
 const types = require("./constants");
 const {
     typeOf,
