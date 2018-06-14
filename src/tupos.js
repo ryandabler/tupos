@@ -39,6 +39,17 @@ const isPrimitive = param => [
         types.SYMBOL
     ].includes(typeOf(param))
 
+/**
+ * Checks whether an arbitrary set of parameters are of the
+ * same type.
+ * @param {*} params Arbitrary set of parameters
+ * @returns {boolean}
+ */
+const areSameType = (...params) =>
+    params.map(typeOf)
+        .reduce((accum, type) => accum.add(type), new Set())
+        .size === 1
+
 module.exports = {
     typeOf,
     isIterable,
