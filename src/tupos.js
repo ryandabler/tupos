@@ -25,6 +25,15 @@ const typeOf = obj =>
 const isIterable = obj =>
     obj ? typeOf(obj[Symbol.iterator]) === types.FUNCTION : false
 
+const isPrimitive = param => [
+        types.NUMBER,
+        types.STRING,
+        types.NULL,
+        types.UNDEFINED,
+        types.BOOLEAN,
+        types.SYMBOL
+    ].includes(typeOf(param))
+
 module.exports = {
     typeOf,
     isIterable
