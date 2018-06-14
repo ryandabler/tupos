@@ -4,7 +4,9 @@
 const chai  = require("chai");
 const {
     typeOf,
-    isIterable
+    isIterable,
+    isPrimitive,
+    areSameType
 } = require("../src/tupos");
 const types = require("../src/constants");
 
@@ -125,5 +127,86 @@ describe("isIterable()", function() {
 
     it("Should return false when no arguments are supplied passed", function() {
         expect(isIterable()).to.be.false;
+    });
+});
+
+describe("isPrimitive()", function() {
+    it("Should return true", function() {
+        const objectsToTest = [
+            1,
+            "Abc",
+            null,
+            undefined,
+            true,
+            Symbol.for("a")
+        ];
+        const results = objectsToTest.map(isPrimitive);
+
+        results.forEach(result => {
+            expect(result).to.be.true;
+        });
+    });
+
+    it("Should return false", function() {
+        const objectsToTest = [
+            [1],
+            {},
+            new Set(),
+            new Map(),
+            new Error(),
+            new Date(),
+            /a/,
+            () => {}
+        ];
+        const results = objectsToTest.map(isPrimitive);
+
+        results.forEach(result => {
+            expect(result).to.be.false;
+        });
+    });
+});
+
+describe("areSameType()", function() {
+    it("Should return true if only passed one param", function() {
+        const objectsToTest = [
+            1,
+            "Abc",
+            null,
+            undefined,
+            true,
+            Symbol.for("a")
+        ];
+        const results = objectsToTest.map(item => areSameType(item));
+        
+        results.forEach(result => {
+            expect(result).to.be.true;
+        });
+    });
+
+    it("Should return true", function() {
+        const objectsToTest = [
+            [1, 2, -6],
+            ["Abc", "Def"],
+            [true, false],
+            [() => {}, function() {}]
+        ];
+        const results = objectsToTest.map(obj => areSameType(...obj));
+
+        results.forEach(result => {
+            expect(result).to.be.true;
+        });
+    });
+
+    it("Should return false", function() {
+        const objectsToTest = [
+            [1, "a"],
+            ["Abc", "Def", true],
+            [true, /a/, "abd", () => {}]
+        ];
+        const results = objectsToTest.map(areSameType);
+
+        results.forEach(result => {
+            expect(result).to.be.false;
+        });
     });
 });
