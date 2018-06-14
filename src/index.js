@@ -3,11 +3,13 @@
 const types = require("./constants");
 const {
     typeOf,
-    isIterable
+    isIterable,
+    isPrimitive
 } = require("./tupos");
 
 module.exports = {
     types,
     typeOf,
-    isIterable
+    isIterable,
+    isPrimitive
 }
