@@ -36,5 +36,6 @@ const isPrimitive = param => [
 
 module.exports = {
     typeOf,
-    isIterable
+    isIterable,
+    isPrimitive
 }
