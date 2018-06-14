@@ -53,5 +53,6 @@ const areSameType = (...params) =>
 module.exports = {
     typeOf,
     isIterable,
-    isPrimitive
+    isPrimitive,
+    areSameType
 }
