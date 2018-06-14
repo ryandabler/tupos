@@ -26,7 +26,7 @@ const isIterable = obj =>
     obj ? typeOf(obj[Symbol.iterator]) === types.FUNCTION : false
 
 /**
- * Determines whether supplied param is a primitive type
+ * Determines whether supplied param is a primitive type.
  * @param {*} param 
  * @returns {boolean}
  */
