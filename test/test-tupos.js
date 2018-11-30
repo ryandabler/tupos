@@ -52,6 +52,9 @@ describe("typeOf()", function() {
             function* a() {},
             WebAssembly,
             async () => {}
+            // (async function* a() {})(),
+            // async function* a() {},
+            // new Blob(['abc'], { type: 'text/plain' })
         ];
         const results = typesToTest.map(typeOf);
         const answers = [
@@ -89,6 +92,9 @@ describe("typeOf()", function() {
             types.GENERATORFUNC,
             types.WASM,
             types.ASYNCFUNC
+            // types.ASYNCGENERATOR,
+            // types.ASYNCGENERATORFUNC,
+            // types.BLOB
         ];
 
         results.forEach((result, idx) => {

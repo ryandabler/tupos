@@ -35,4 +35,7 @@ module.exports = {
     GENERATORFUNC: "GeneratorFunction",
     WASM: "WebAssembly",
     ASYNCFUNC: "AsyncFunction",
+    ASYNCGENERATOR: "AsyncGenerator",
+    ASYNCGENERATORFUNC: "AsyncGeneratorFunction",
+    BLOB: "Blob"
 }
