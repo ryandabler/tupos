@@ -9,7 +9,10 @@ const {
     areSameType,
     is,
     are,
-    isOneOf
+    isOneOf,
+    areOneOf,
+    isInstanceOf,
+    areInstancesOf
 } = require("../src/tupos");
 const types = require("../src/constants");
 
@@ -334,5 +337,94 @@ describe("isOneOf()", function() {
                 closure(instance)
             ).to.be.false;
         });
+    });
+});
+
+describe("areOneOf()", function() {
+    let number = 0;
+
+    beforeEach(function() {
+        number = Math.floor(Math.random() * 5 + 2);
+    });
+
+    afterEach(function() {
+        number = 0;
+    });
+
+    it("Should return a function when called", function() {
+        const [ types ] = getNTypes(number);
+        const result = areOneOf(...types);
+        
+        expect(result).to.be.an.instanceof(Function);
+    });
+
+    it("Should return true", function() {
+        const [ types, instances ] = getNTypes(number);
+        const closure = areOneOf(...types);
+        const _instances = Array(Math.floor(Math.random() * number + 1))
+            .fill(0)
+            .map(
+                () => instances[ Math.floor(Math.random() * instances.length) ]
+            );
+        expect(closure(..._instances)).to.be.true;
+    });
+
+    it("Should return false", function() {
+        const [ types, , disjointInstances ] = getNTypes(number);
+        const closure = areOneOf(...types);
+        const _disjointInstances = Array(Math.floor(Math.random() * number + 1))
+            .fill(0)
+            .map(
+                () => disjointInstances[ Math.floor(Math.random() * disjointInstances.length) ]
+            );
+        expect(closure(..._disjointInstances)).to.be.false;
+    });
+});
+
+describe("isInstanceOf()", function() {
+    class Dummy1 {}
+    class Dummy2 {}
+    class Dummy3 {}
+
+    it("Should return a function when called", function() {
+        const result = isInstanceOf(Dummy1, Dummy2);
+        
+        expect(result).to.be.an.instanceof(Function);
+    });
+
+    it("Should return true", function() {
+        const closure = isInstanceOf(Dummy1, Dummy2);
+        [ Dummy1, Dummy2 ].forEach(_class => {
+            expect(closure(new _class)).to.be.true;
+        })
+    });
+
+    it("Should return false", function() {
+        const closure = isInstanceOf(Dummy1, Dummy2);
+        expect(closure(new Dummy3())).to.be.false;
+    });
+});
+
+describe("areInstancesOf()", function() {
+    class Dummy1 {}
+    class Dummy2 {}
+    class Dummy3 {}
+
+    it("Should return a function when called", function() {
+        const result = areInstancesOf(Dummy1, Dummy2);
+        
+        expect(result).to.be.an.instanceof(Function);
+    });
+
+    it("Should return true", function() {
+        const closure = areInstancesOf(Dummy1, Dummy2);
+        var instances = [ Dummy1, Dummy2 ].map(_class => new _class);
+        expect(closure(...instances)).to.be.true;
+    });
+
+    it("Should return false", function() {
+        const closure = areInstancesOf(Dummy1, Dummy2);
+        var instances = [ Dummy1, Dummy2 ].map(_class => new _class);
+        expect(closure(...instances, new Dummy3)).to.be.false;
     });
 });

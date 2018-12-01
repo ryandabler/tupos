@@ -75,6 +75,33 @@ const are = type => (...itemsToCheck) => itemsToCheck.every(is(type));
 const isOneOf = (...types) =>
     itemToCheck => types.includes(typeOf(itemToCheck));
 
+/**
+ * Accepts an arbitrary list of types and returns a function whose parameters
+ * should all be of types in that list
+ * @param {...string} types
+ * @returns {Function}
+ */
+const areOneOf = (...types) =>
+    (...itemsToCheck) => itemsToCheck.every(isOneOf(...types));
+
+/**
+ * Accepts an arbitrary list of classes and returns a function whose parameter
+ * should be an instance of a class in that list
+ * @param {...Function} types
+ * @returns {Function}
+ */
+const isInstanceOf = (..._classes) =>
+    itemToCheck => _classes.some(_class => itemToCheck instanceof _class);
+
+/**
+ * Accepts an arbitrary list of classes and returns a function whose parameters
+ * should be instances of any class in that list
+ * @param {...Function} types
+ * @returns {Function}
+ */
+const areInstancesOf = (..._classes) =>
+    (...itemsToCheck) => itemsToCheck.every(isInstanceOf(..._classes));
+
 module.exports = {
     typeOf,
     isIterable,
