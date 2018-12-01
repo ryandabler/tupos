@@ -49,10 +49,10 @@ const typesToTest = [
     new ArrayBuffer(),
     new DataView(new ArrayBuffer()),
     JSON,
-    (function* a() {})(),
-    function* a() {},
+    // (function* a() {})(),
+    // function* a() {},
     WebAssembly,
-    async () => {}
+    // async () => {}
     // (async function* a() {})(),
     // async function* a() {},
     // new Blob(['abc'], { type: 'text/plain' })
@@ -89,10 +89,10 @@ const answers = [
     types.ARRAYBUFFER,
     types.DATAVIEW,
     types.JSON,
-    types.GENERATOR,
-    types.GENERATORFUNC,
+    // types.GENERATOR,
+    // types.GENERATORFUNC,
     types.WASM,
-    types.ASYNCFUNC
+    // types.ASYNCFUNC
     // types.ASYNCGENERATOR,
     // types.ASYNCGENERATORFUNC,
     // types.BLOB
