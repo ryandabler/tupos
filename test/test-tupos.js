@@ -307,7 +307,7 @@ describe("isOneOf()", function() {
 
     afterEach(function() {
         number = 0;
-    })
+    });
 
     it("Should return a function when called", function() {
         const [ types ] = getNTypes(number);
