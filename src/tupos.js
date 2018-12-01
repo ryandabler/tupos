@@ -50,6 +50,31 @@ const areSameType = (...params) =>
         .reduce((accum, type) => accum.add(type), new Set())
         .size === 1
 
+/**
+ * Accepts a type and returns a function whose single parameter
+ * is an item whose type should be checked against `type`
+ * @param {string} type 
+ * @returns {boolean}
+ */
+const is = type => itemToCheck => typeOf(itemToCheck) === type;
+
+/**
+ * Accepts a type and returns a variadic function whose parameters
+ * are items whose type should be checked against `type`
+ * @param {string} type 
+ * @returns {Function}
+ */
+const are = type => (...itemsToCheck) => itemsToCheck.every(is(type));
+
+/**
+ * Accepts an arbitrary list of types and returns a function whose parameter
+ * should be of a type in that list
+ * @param {...string} types
+ * @returns {Function}
+ */
+const isOneOf = (...types) =>
+    itemToCheck => types.includes(typeOf(itemToCheck));
+
 module.exports = {
     typeOf,
     isIterable,

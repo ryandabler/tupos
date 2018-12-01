@@ -6,7 +6,10 @@ const {
     typeOf,
     isIterable,
     isPrimitive,
-    areSameType
+    areSameType,
+    is,
+    are,
+    isOneOf
 } = require("../src/tupos");
 const types = require("../src/constants");
 
@@ -91,6 +94,25 @@ const answers = [
     // types.ASYNCGENERATORFUNC,
     // types.BLOB
 ];
+
+const getNTypes = n => {
+    const types = [ ...answers ];
+    const instances = [ ...typesToTest ];
+    const result = [ [], [], [] ];
+
+    while (result[0].length < n) {
+        const i = Math.floor(Math.random() * types.length);
+        result[0].push(...types.splice(i, 1));
+        result[1].push(...instances.splice(i, 1));
+    }
+
+    while (result[2].length < n) {
+        const i = Math.floor(Math.random() * instances.length);
+        result[2].push(instances[i])
+    }
+
+    return result;
+}
 
 ////////////////////////////
 // Test
@@ -215,6 +237,102 @@ describe("areSameType()", function() {
 
         results.forEach(result => {
             expect(result).to.be.false;
+        });
+    });
+});
+
+describe("is()", function() {
+    it("Should return a function when called", function() {
+        const [ type ] = getNTypes(1)
+        const result = is(...type);
+        
+        expect(result).to.be.an.instanceof(Function);
+    });
+
+    it("Should return true", function() {
+        const closures = answers.map(is);
+
+        closures.forEach((closure, idx) => {
+            expect(closure(typesToTest[idx])).to.be.true;
+        });
+    });
+
+    it("Should return false", function() {
+        const closures = answers.map(is);
+
+        closures.forEach((closure, idx) => {
+            expect(
+                closure(typesToTest[idx === 0 ? closures.length - 1 : idx - 1])
+            ).to.be.false;
+        });
+    });
+});
+
+describe("are()", function() {
+    it("Should return a function when called", function() {
+        const [ type ] = getNTypes(1);
+        const result = are(...type);
+        
+        expect(result).to.be.an.instanceof(Function);
+    });
+
+    it("Should return true", function() {
+        const closures = answers.map(are);
+        
+        closures.forEach((closure, idx) => {
+            const type = typesToTest[idx];
+            expect(closure(type, type)).to.be.true;
+        });
+    });
+
+    it("Should return false", function() {
+        const closures = answers.map(are);
+
+        closures.forEach((closure, idx) => {
+            const type1 = typesToTest[idx];
+            const type2 = typesToTest[idx === 0 ? closures.length - 1 : idx - 1]
+            expect(
+                closure(type1, type2)
+            ).to.be.false;
+        });
+    });
+});
+
+describe("isOneOf()", function() {
+    let number = 0;
+
+    beforeEach(function() {
+        number = Math.floor(Math.random() * 5 + 2);
+    });
+
+    afterEach(function() {
+        number = 0;
+    })
+
+    it("Should return a function when called", function() {
+        const [ types ] = getNTypes(number);
+        const result = isOneOf(...types);
+        
+        expect(result).to.be.an.instanceof(Function);
+    });
+
+    it("Should return true", function() {
+        const [ types, instances ] = getNTypes(number);
+        const closure = isOneOf(...types);
+
+        instances.forEach(instance => {
+            expect(closure(instance)).to.be.true;
+        });
+    });
+
+    it("Should return false", function() {
+        const [ types, , disjointInstances ] = getNTypes(number);
+        const closure = isOneOf(...types);
+
+        disjointInstances.forEach((instance, idx) => {
+            expect(
+                closure(instance)
+            ).to.be.false;
         });
     });
 });
