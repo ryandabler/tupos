@@ -106,5 +106,11 @@ module.exports = {
     typeOf,
     isIterable,
     isPrimitive,
-    areSameType
+    areSameType,
+    is,
+    are,
+    isOneOf,
+    areOneOf,
+    isInstanceOf,
+    areInstancesOf
 }
