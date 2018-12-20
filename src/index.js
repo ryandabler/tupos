@@ -5,7 +5,13 @@ const {
     typeOf,
     isIterable,
     isPrimitive,
-    areSameType
+    areSameType,
+    is,
+    are,
+    isOneOf,
+    areOneOf,
+    isInstanceOf,
+    areInstancesOf
 } = require("./tupos");
 
 module.exports = {
@@ -13,5 +19,11 @@ module.exports = {
     typeOf,
     isIterable,
     isPrimitive,
-    areSameType
+    areSameType,
+    is,
+    are,
+    isOneOf,
+    areOneOf,
+    isInstanceOf,
+    areInstancesOf
 }
