@@ -16,6 +16,7 @@ npm install tupos
 ## API
 ### Constants
 Tupos has a large library of constants representing various JavaScript objects. Currently the following are supported as part of a `types` object in the package:
+
 | Constant           | Value                    |
 | ------------------ | ------------------------ |
 | FUNCTION           | "Function"               |
@@ -58,6 +59,7 @@ Tupos has a large library of constants representing various JavaScript objects. 
 
 ### Functions
 Tupos also has a number of functions to aid in type-checking:
+
 | Function           | Description                                     |
 | ------------------ | ----------------------------------------------- |
 | `typeOf`           | Determines the type of any object passed to it. Can also detect custom built objects if they have the `Symbol.toStringTag` getter |
