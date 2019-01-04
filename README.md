@@ -56,6 +56,8 @@ Tupos has a large library of constants representing various JavaScript objects. 
 | ASYNCGENERATOR     | "AsyncGenerator"         |
 | ASYNCGENERATORFUNC | "AsyncGeneratorFunction" |
 | BLOB               | "Blob"                   |
+| URL                | "URL"                    |
+| URLPARAMS          | "URLSearchParam"         |
 
 ### Functions
 Tupos also has a number of functions to aid in type-checking:

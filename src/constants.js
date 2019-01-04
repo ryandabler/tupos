@@ -37,5 +37,7 @@ module.exports = {
     ASYNCFUNC: "AsyncFunction",
     ASYNCGENERATOR: "AsyncGenerator",
     ASYNCGENERATORFUNC: "AsyncGeneratorFunction",
-    BLOB: "Blob"
+    BLOB: "Blob",
+    URL: "URL",
+    URLPARAMS: "URLSearchParams"
 }

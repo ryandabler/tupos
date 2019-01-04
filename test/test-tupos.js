@@ -56,6 +56,8 @@ const typesToTest = [
     // (async function* a() {})(),
     // async function* a() {},
     // new Blob(['abc'], { type: 'text/plain' })
+    new URL('http://www.google.com'),
+    new URLSearchParams('q=URLUtils.searchParams&topic=api')
 ];
 
 const answers = [
@@ -96,6 +98,8 @@ const answers = [
     // types.ASYNCGENERATOR,
     // types.ASYNCGENERATORFUNC,
     // types.BLOB
+    types.URL,
+    types.URLPARAMS
 ];
 
 const getNTypes = n => {
