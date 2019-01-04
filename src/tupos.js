@@ -1,6 +1,7 @@
 "use strict";
 
 const types = require("./constants");
+const SLICE_START = '[object '.length;
 
 /**
  * Determines the type of any JavaScript element.
@@ -13,8 +14,7 @@ const types = require("./constants");
  */
 const typeOf = obj =>
     Object.prototype.toString.call(obj)
-        .split(" ")[1]
-        .slice(0, -1)
+        .slice(SLICE_START, -1)
 
 /**
  * Determines whether supplied item is iterable.
