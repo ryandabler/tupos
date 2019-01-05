@@ -30,14 +30,14 @@ const isIterable = obj =>
  * @param {*} param 
  * @returns {boolean}
  */
-const isPrimitive = param => [
+const isPrimitive = param => isOneOf(
         types.NUMBER,
         types.STRING,
         types.NULL,
         types.UNDEFINED,
         types.BOOLEAN,
         types.SYMBOL
-    ].includes(typeOf(param))
+    )(param)
 
 /**
  * Checks whether an arbitrary set of parameters are of the
