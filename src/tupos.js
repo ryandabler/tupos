@@ -102,6 +102,14 @@ const isInstanceOf = (..._classes) =>
 const areInstancesOf = (..._classes) =>
     (...itemsToCheck) => itemsToCheck.every(isInstanceOf(..._classes));
 
+/**
+ * Accepts an arbitrary list of values and returns a function which accepts a value
+ * and checks that that value exists in the enumerated list.
+ * @param  {...any} enumValues 
+ * @returns {Function}
+ */
+const isEnum = (...enumValues) => value => enumValues.some(enumValue => enumValue === value);
+
 module.exports = {
     typeOf,
     isIterable,
@@ -112,5 +120,6 @@ module.exports = {
     isOneOf,
     areOneOf,
     isInstanceOf,
-    areInstancesOf
+    areInstancesOf,
+    isEnum
 }
