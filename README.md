@@ -75,6 +75,7 @@ Tupos also has a number of functions to aid in type-checking:
 | `isInstanceOf`     | A higher-order variadic function which takes a list of classes and returns a function which checks whether its parameter is an instance of any of those classes and returns `true` or `false` |
 | `areInstanceOf`    | Works the same as `isInstanceOf` except it checks whether all elements of an arbitrary list are instances any of the specified classes |
 | `isEnum`           | A higher-order variadic function which takes a list of values and returns a function which checks whether its parameter exists in that enumerated list and returns `true` or `false` |
+| `areEnum`          | Works the same as `isEnum` except it checks whether all elements of an arbitrary list exist in the enumerated list |
 
 ## License
 Tupos is licensed under the MIT license.

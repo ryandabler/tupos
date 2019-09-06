@@ -13,7 +13,8 @@ const {
     areOneOf,
     isInstanceOf,
     areInstancesOf,
-    isEnum
+    isEnum,
+    areEnum
 } = require("../src/tupos");
 const types = require("../src/constants");
 
@@ -453,6 +454,29 @@ describe("isEnum()", function() {
     it("Should return false", function() {
         const closure = isEnum(...values);
         const result = values2.some(closure);
+        expect(result).to.be.false;
+    });
+});
+
+describe("areEnum()", function() {
+    const values = [1, 'abc', 'def', true];
+    const values2 = [2, 'ghi', false];
+
+    it("Should return a function when called", function() {
+        const result = areEnum(...values);
+        
+        expect(result).to.be.an.instanceof(Function);
+    });
+
+    it("Should return true", function() {
+        const closure = areEnum(...values);
+        const result = closure(...values);
+        expect(result).to.be.true;
+    });
+
+    it("Should return false", function() {
+        const closure = areEnum(...values);
+        const result = closure(...values, ...values2);
         expect(result).to.be.false;
     });
 });
