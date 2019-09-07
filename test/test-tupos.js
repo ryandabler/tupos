@@ -17,6 +17,8 @@ const {
     areEnum,
     hasInterface,
     haveInterface,
+    hasShape,
+    haveShape
 } = require("../src/tupos");
 const types = require("../src/constants");
 
@@ -553,6 +555,79 @@ describe("haveInterface()", function() {
     it("Should return false", function() {
         const closure = haveInterface(_interface);
         const result = closure(...doesImplement, doesNotImplement[0]);
+        expect(result).to.be.false;
+    });
+});
+
+describe("hasShape()", function() {
+    const shape = {
+        a: types.STRING,
+        b: types.NUMBER,
+        c: types.ARRAY,
+        d: types.OBJECT
+    };
+
+    const isOfShape = [
+        { a: 'abc', b: 123, c: [1, true], d: {} }
+    ];
+
+    const isNotOfShape = [
+        { a: 'abc', b: '123', c: [1, true], d: {} },
+        { a: 'xyz', b: 123, c: [ false, '1' ], d: { key: Symbol() }, e: false },
+        { a: 'xyz', c: [ false, '1' ], d: { key: Symbol() } }
+    ];
+
+    it("Should return a function when called", function() {
+        const result = hasShape(shape);
+        
+        expect(result).to.be.an.instanceof(Function);
+    });
+
+    it("Should return true", function() {
+        const closure = hasShape(shape);
+        const result = isOfShape.every(closure);
+        expect(result).to.be.true;
+    });
+
+    it("Should return false", function() {
+        const closure = hasShape(shape);
+        const result = isNotOfShape.some(closure);
+        expect(result).to.be.false;
+    });
+});
+
+describe("haveShape()", function() {
+    const shape = {
+        a: types.STRING,
+        b: types.NUMBER,
+        c: types.ARRAY,
+        d: types.OBJECT
+    };
+
+    const isOfShape = [
+        { a: 'abc', b: 123, c: [1, true], d: {} },
+        { a: 'xyz', b: -321, c: ['a', false], d: { key: Symbol('value') } }
+    ];
+
+    const isNotOfShape = [
+        { a: 'abc', b: '123', c: [1, true], d: {} }
+    ];
+
+    it("Should return a function when called", function() {
+        const result = haveShape(shape);
+        
+        expect(result).to.be.an.instanceof(Function);
+    });
+
+    it("Should return true", function() {
+        const closure = haveShape(shape);
+        const result = closure(...isOfShape);
+        expect(result).to.be.true;
+    });
+
+    it("Should return false", function() {
+        const closure = haveShape(shape);
+        const result = closure(...isOfShape, isNotOfShape[0]);
         expect(result).to.be.false;
     });
 });

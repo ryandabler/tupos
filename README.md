@@ -78,6 +78,8 @@ Tupos also has a number of functions to aid in type-checking:
 | `areEnum`          | Works the same as `isEnum` except it checks whether all elements of an arbitrary list exist in the enumerated list |
 | `hasInterface`     | A higher-order function which accepts an object whose values are types and returns a function which accepts an object and checks that it contains at least all the keys in the interface and whose values are or the designated type. Returns `true` or `false` |
 | `haveInterface`    | Works the same as `hasInterface` except it checks multiple objects simultaneously |
+| `hasShape`         | A higher-order function which accepts an object whose values are types and returns a function which accepts an object and checks that it contains exactly the keys in the shape template and whose values are of the designated type. Returns `true` or `false` |
+| `haveShape`        | Works the same as `hasShape` except it checks multiple objects simultaneously |
 
 ## License
 Tupos is licensed under the MIT license.

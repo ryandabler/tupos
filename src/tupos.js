@@ -141,6 +141,36 @@ const haveInterface = intfc => (...objects) => objects.every(object => {
     return eInterface.every(([key, type]) => typeOf(object[key]) === type);
 });
 
+/**
+ * Accepts an object whose values are types and returns a function whose parameter
+ * should be an object which contains exactly the keys in the shape and whose values
+ * are its respective types.
+ * @param {*} shape 
+ * @returns {Function}
+ */
+const hasShape = shape => object => {
+    const eShape = Object.entries(shape);
+    const eObject = Object.entries(object);
+
+    return eShape.length === eObject.length
+        && hasInterface(shape)(object);
+};
+
+/**
+ * Accepts an object whose values are types and returns a function whose parameters
+ * should be objects which contain exactly the keys in the shape and whose values
+ * are its respective types.
+ * @param {*} shape 
+ * @returns {Function}
+ */
+const haveShape = shape => (...objects) => objects.every(object => {
+    const eShape = Object.entries(shape);
+    const eObject = Object.entries(object);
+
+    return eShape.length === eObject.length
+        && hasInterface(shape)(object);
+});
+
 module.exports = {
     typeOf,
     isIterable,
@@ -156,4 +186,6 @@ module.exports = {
     areEnum,
     hasInterface,
     haveInterface,
+    hasShape,
+    haveShape
 }
