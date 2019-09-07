@@ -14,7 +14,9 @@ const {
     isInstanceOf,
     areInstancesOf,
     isEnum,
-    areEnum
+    areEnum,
+    hasInterface,
+    haveInterface,
 } = require("../src/tupos");
 const types = require("../src/constants");
 
@@ -477,6 +479,80 @@ describe("areEnum()", function() {
     it("Should return false", function() {
         const closure = areEnum(...values);
         const result = closure(...values, ...values2);
+        expect(result).to.be.false;
+    });
+});
+
+describe("hasInterface()", function() {
+    const _interface = {
+        a: types.STRING,
+        b: types.NUMBER,
+        c: types.ARRAY,
+        d: types.OBJECT
+    };
+
+    const doesImplement = [
+        { a: 'abc', b: 123, c: [1, true], d: {} },
+        { a: 'xyz', b: -321, c: [ false, '1' ], d: { key: Symbol() }, e: false }
+    ];
+
+    const doesNotImplement = [
+        { a: 'abc', b: '123', c: [1, true], d: {} },
+        { a: 'xyz', c: [ false, '1' ], d: { key: Symbol() }, e: false }
+    ];
+
+    it("Should return a function when called", function() {
+        const result = hasInterface(_interface);
+        
+        expect(result).to.be.an.instanceof(Function);
+    });
+
+    it("Should return true", function() {
+        const closure = hasInterface(_interface);
+        const result = doesImplement.every(closure);
+        expect(result).to.be.true;
+    });
+
+    it("Should return false", function() {
+        const closure = hasInterface(_interface);
+        const result = doesNotImplement.some(closure);
+        expect(result).to.be.false;
+    });
+});
+
+describe("haveInterface()", function() {
+    const _interface = {
+        a: types.STRING,
+        b: types.NUMBER,
+        c: types.ARRAY,
+        d: types.OBJECT
+    };
+
+    const doesImplement = [
+        { a: 'abc', b: 123, c: [1, true], d: {} },
+        { a: 'xyz', b: -321, c: [ false, '1' ], d: { key: Symbol() }, e: false }
+    ];
+
+    const doesNotImplement = [
+        { a: 'abc', b: '123', c: [1, true], d: {} },
+        { a: 'xyz', c: [ false, '1' ], d: { key: Symbol() }, e: false }
+    ];
+
+    it("Should return a function when called", function() {
+        const result = haveInterface(_interface);
+        
+        expect(result).to.be.an.instanceof(Function);
+    });
+
+    it("Should return true", function() {
+        const closure = haveInterface(_interface);
+        const result = closure(...doesImplement);
+        expect(result).to.be.true;
+    });
+
+    it("Should return false", function() {
+        const closure = haveInterface(_interface);
+        const result = closure(...doesImplement, doesNotImplement[0]);
         expect(result).to.be.false;
     });
 });

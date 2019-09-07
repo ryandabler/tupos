@@ -118,6 +118,29 @@ const isEnum = (...enumValues) => value => enumValues.some(enumValue => enumValu
  */
 const areEnum = (...enumValues) => (...values) => values.every(isEnum(...enumValues));
 
+/**
+ * Accepts an object whose values are types and returns a function whose parameter
+ * should be an object with keys in the interface and values with respective types.
+ * @param {Object} intfc 
+ * @returns {Function}
+ */
+const hasInterface = intfc => object => {
+    const eInterface = Object.entries(intfc);
+    return eInterface.every(([key, type]) => typeOf(object[key]) === type);
+};
+
+/**
+ * Accepts an object whose values are types and returns a function whose parameters
+ * should be objects which at least contain all of the  keys in the interface and
+ * values with respective types.
+ * @param {Object} intfc 
+ * @returns {Function}
+ */
+const haveInterface = intfc => (...objects) => objects.every(object => {
+    const eInterface = Object.entries(intfc);
+    return eInterface.every(([key, type]) => typeOf(object[key]) === type);
+});
+
 module.exports = {
     typeOf,
     isIterable,
@@ -130,5 +153,7 @@ module.exports = {
     isInstanceOf,
     areInstancesOf,
     isEnum,
-    areEnum
+    areEnum,
+    hasInterface,
+    haveInterface,
 }
