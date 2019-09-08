@@ -80,6 +80,8 @@ Tupos also has a number of functions to aid in type-checking:
 | `haveInterface`    | Works the same as `hasInterface` except it checks multiple objects simultaneously |
 | `hasShape`         | A higher-order function which accepts an object whose values are types and returns a function which accepts an object and checks that it contains exactly the keys in the shape template and whose values are of the designated type. Returns `true` or `false` |
 | `haveShape`        | Works the same as `hasShape` except it checks multiple objects simultaneously |
+| `isArrayOf`        | A higher-order function which accepts a list of types and returns a function which accepts an array and checks that all of its elements are of the specified types. Returns `true` or `false` |
+| `areArraysOf`      | Works the same as `isArrayOf` except it checks multiple arrays simultaneously |
 
 ## License
 Tupos is licensed under the MIT license.

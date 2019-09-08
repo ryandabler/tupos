@@ -18,7 +18,9 @@ const {
     hasInterface,
     haveInterface,
     hasShape,
-    haveShape
+    haveShape,
+    isArrayOf,
+    areArraysOf
 } = require("../src/tupos");
 const types = require("../src/constants");
 
@@ -628,6 +630,67 @@ describe("haveShape()", function() {
     it("Should return false", function() {
         const closure = haveShape(shape);
         const result = closure(...isOfShape, isNotOfShape[0]);
+        expect(result).to.be.false;
+    });
+});
+
+describe("isArrayOf()", function() {
+    const _types = [ types.STRING, types.SYMBOL, types.OBJECT ];
+    const matchingArrays = [
+        [],
+        [ 'abc' ],
+        [ '0', Symbol(), { a: -12 } ],
+        [ Symbol(), { a: -12 } ]
+    ];
+    const nonMatchingArrays = [
+        [ Symbol(), { a: -12 }, [] ],
+        [ 1 ]
+    ];
+
+    it("Should return a function when called", function() {
+        const result = isArrayOf(..._types);
+        
+        expect(result).to.be.an.instanceof(Function);
+    });
+
+    it("Should return true", function() {
+        const closure = isArrayOf(..._types);
+        const result = matchingArrays.every(closure);
+        expect(result).to.be.true;
+    });
+
+    it("Should return false", function() {
+        const closure = isArrayOf(..._types);
+        const result = nonMatchingArrays.every(closure);
+        expect(result).to.be.false;
+    });
+});
+
+describe("areArraysOf()", function() {
+    const _types = [ types.STRING, types.SYMBOL, types.OBJECT ];
+    const matchingArrays = [
+        [],
+        [ 'abc' ],
+        [ '0', Symbol(), { a: -12 } ],
+        [ Symbol(), { a: -12 } ]
+    ];
+    const nonMatchingArray = [ Symbol(), { a: -12 }, [] ];
+
+    it("Should return a function when called", function() {
+        const result = areArraysOf(..._types);
+        
+        expect(result).to.be.an.instanceof(Function);
+    });
+
+    it("Should return true", function() {
+        const closure = areArraysOf(..._types);
+        const result = closure(...matchingArrays);
+        expect(result).to.be.true;
+    });
+
+    it("Should return false", function() {
+        const closure = areArraysOf(..._types);
+        const result = closure(...matchingArrays, nonMatchingArray);
         expect(result).to.be.false;
     });
 });

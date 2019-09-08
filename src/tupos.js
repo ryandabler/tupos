@@ -171,6 +171,22 @@ const haveShape = shape => (...objects) => objects.every(object => {
         && hasInterface(shape)(object);
 });
 
+/**
+ * Accepts a list of types and returns a function which accepts an array and makes sure
+ * every element in the array has a type in the original list.
+ * @param  {...string} types 
+ * @returns {Function}
+ */
+const isArrayOf = (...types) => array => array.every(item => types.includes(typeOf(item)));
+
+/**
+ * Accepts a list of types and returns a function which accepts multiple arrays and makes sure
+ * every element in every array has a type in the original list.
+ * @param  {...string} types 
+ * @returns {Function}
+ */
+const areArraysOf = (...types) => (...arrays) => arrays.every(isArrayOf(...types));
+
 module.exports = {
     typeOf,
     isIterable,
@@ -187,5 +203,7 @@ module.exports = {
     hasInterface,
     haveInterface,
     hasShape,
-    haveShape
+    haveShape,
+    isArrayOf,
+    areArraysOf
 }
