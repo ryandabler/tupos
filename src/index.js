@@ -11,7 +11,17 @@ const {
     isOneOf,
     areOneOf,
     isInstanceOf,
-    areInstancesOf
+    areInstancesOf,
+    isEnum,
+    areEnum,
+    hasInterface,
+    haveInterface,
+    hasShape,
+    haveShape,
+    isArrayOf,
+    areArraysOf,
+    isObjectOf,
+    areObjectsOf
 } = require("./tupos");
 
 module.exports = {
@@ -25,5 +35,15 @@ module.exports = {
     isOneOf,
     areOneOf,
     isInstanceOf,
-    areInstancesOf
+    areInstancesOf,
+    isEnum,
+    areEnum,
+    hasInterface,
+    haveInterface,
+    hasShape,
+    haveShape,
+    isArrayOf,
+    areArraysOf,
+    isObjectOf,
+    areObjectsOf
 }
