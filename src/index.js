@@ -46,4 +46,4 @@ module.exports = {
     areArraysOf,
     isObjectOf,
     areObjectsOf
-}
+};
