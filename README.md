@@ -82,6 +82,8 @@ Tupos also has a number of functions to aid in type-checking:
 | `haveShape`        | Works the same as `hasShape` except it checks multiple objects simultaneously |
 | `isArrayOf`        | A higher-order function which accepts a list of types and returns a function which accepts an array and checks that all of its elements are of the specified types. Returns `true` or `false` |
 | `areArraysOf`      | Works the same as `isArrayOf` except it checks multiple arrays simultaneously |
+| `isObjectOf`       | A higher-order function which accepts a list of types and returns a function which accepts an object and checks that all of its values are of the specified types. Returns `true` or `false` |
+| `areObjectsOf`     | Works the same as `isObjectOf` except it checks multiple objects simultaneously |
 
 ## License
 Tupos is licensed under the MIT license.

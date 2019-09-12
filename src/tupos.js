@@ -187,6 +187,22 @@ const isArrayOf = (...types) => array => array.every(item => types.includes(type
  */
 const areArraysOf = (...types) => (...arrays) => arrays.every(isArrayOf(...types));
 
+/**
+ * Accepts a list of types and returns a function which accepts an object and makes sure
+ * every value in the object is of a type in the original list.
+ * @param  {...string} types 
+ * @returns {Function}
+ */
+const isObjectOf = (...types) => object => Object.values(object).every(value => types.includes(typeOf(value)));
+
+/**
+ * Accepts a list of types and returns a function which accepts an arbitrary number of objects
+ * and makes sure every value for every object is of a type in the original list.
+ * @param  {...string} types 
+ * @returns {Function}
+ */
+const areObjectsOf = (...types) => (...objects) => objects.every(isObjectOf(...types));
+
 module.exports = {
     typeOf,
     isIterable,
@@ -205,5 +221,7 @@ module.exports = {
     hasShape,
     haveShape,
     isArrayOf,
-    areArraysOf
+    areArraysOf,
+    isObjectOf,
+    areObjectsOf
 }
