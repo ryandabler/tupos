@@ -40,4 +40,4 @@ module.exports = {
     BLOB: 'Blob',
     URL: 'URL',
     URLPARAMS: 'URLSearchParams'
-}
+};
