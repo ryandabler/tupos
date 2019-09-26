@@ -14,7 +14,7 @@ const SLICE_START = '[object '.length;
  */
 const typeOf = obj =>
     Object.prototype.toString.call(obj)
-        .slice(SLICE_START, -1)
+        .slice(SLICE_START, -1);
 
 /**
  * Determines whether supplied item is iterable.
@@ -23,7 +23,7 @@ const typeOf = obj =>
  * @returns {boolean}
  */
 const isIterable = obj =>
-    obj ? typeOf(obj[Symbol.iterator]) === types.FUNCTION : false
+    obj ? typeOf(obj[Symbol.iterator]) === types.FUNCTION : false;
 
 /**
  * Determines whether supplied param is a primitive type.
@@ -37,7 +37,7 @@ const isPrimitive = param => isOneOf(
         types.UNDEFINED,
         types.BOOLEAN,
         types.SYMBOL
-    )(param)
+    )(param);
 
 /**
  * Checks whether an arbitrary set of parameters are of the
@@ -48,7 +48,7 @@ const isPrimitive = param => isOneOf(
 const areSameType = (...params) =>
     params.map(typeOf)
         .reduce((accum, type) => accum.add(type), new Set())
-        .size === 1
+        .size === 1;
 
 /**
  * Accepts a type and returns a function whose single parameter
