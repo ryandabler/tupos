@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-const types = require("./constants");
+const types = require('./constants');
 const SLICE_START = '[object '.length;
 
 /**
