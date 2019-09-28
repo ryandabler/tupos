@@ -26,7 +26,6 @@
     "@babel/preset-env": "^7.6.0",
     "@babel/register": "^7.6.0",
     "babel-plugin-istanbul": "^5.2.0",
-    "babel-preset-minify": "^0.5.1",
     "chai": "^4.2.0",
     "coveralls": "^3.0.6",
     "cross-env": "^5.2.1",
