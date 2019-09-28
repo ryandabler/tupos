@@ -6,3 +6,5 @@ test
 .eslintrc.json
 .gitignore
 .travis.yml
+.babelrc
+.nycrc

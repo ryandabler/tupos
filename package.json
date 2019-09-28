@@ -31,39 +31,5 @@
     "cross-env": "^5.2.1",
     "mocha": "^6.2.0",
     "nyc": "^14.1.1"
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-env"
-    ],
-    "env": {
-      "test": {
-        "plugins": [
-          "istanbul"
-        ]
-      },
-      "production": {
-        "presets": [
-          "minify"
-        ]
-      }
-    }
-  },
-  "nyc": {
-    "check-coverage": true,
-    "per-file": true,
-    "lines": 100,
-    "statements": 100,
-    "functions": 100,
-    "branches": 100,
-    "require": [
-      "@babel/register"
-    ],
-    "sourceMap": false,
-    "instrument": false,
-    "reporter": [
-      "text",
-      "lcov"
-    ]
   }
 }
