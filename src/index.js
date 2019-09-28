@@ -1,7 +1,7 @@
 "use strict";
 
-const types = require("./constants");
-const {
+import types from "./constants";
+import {
     typeOf,
     isIterable,
     isPrimitive,
@@ -22,9 +22,9 @@ const {
     areArraysOf,
     isObjectOf,
     areObjectsOf
-} = require("./tupos");
+} from "./tupos";
 
-module.exports = {
+export {
     types,
     typeOf,
     isIterable,

@@ -1,6 +1,7 @@
 'use strict';
 
-const types = require('./constants');
+import types from './constants';
+
 const SLICE_START = '[object '.length;
 
 /**
@@ -203,7 +204,7 @@ const isObjectOf = (...types) => object => Object.values(object).every(value => 
  */
 const areObjectsOf = (...types) => (...objects) => objects.every(isObjectOf(...types));
 
-module.exports = {
+export {
     typeOf,
     isIterable,
     isPrimitive,

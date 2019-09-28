@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = {
+export default {
     FUNCTION: 'Function',
     OBJECT: 'Object',
     NUMBER: 'Number',

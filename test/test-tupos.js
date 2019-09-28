@@ -1,8 +1,8 @@
 ////////////////////////////
 // Initialize
 ////////////////////////////
-const chai  = require('chai');
-const {
+import { expect } from 'chai';
+import {
     typeOf,
     isIterable,
     isPrimitive,
@@ -23,10 +23,8 @@ const {
     areArraysOf,
     isObjectOf,
     areObjectsOf
-} = require('../src/tupos');
-const types = require('../src/constants');
-
-const expect = chai.expect;
+} from '../src/tupos';
+import types from '../src/constants';
 
 const typesToTest = [
     () => 1,
