@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-import types from "./constants";
+import types from './constants';
 import {
     typeOf,
     isIterable,
@@ -22,7 +22,7 @@ import {
     areArraysOf,
     isObjectOf,
     areObjectsOf
-} from "./tupos";
+} from './tupos';
 
 export {
     types,

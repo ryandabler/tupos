@@ -8,7 +8,7 @@ const SLICE_START = '[object '.length;
  * Determines the type of any JavaScript element.
  * 
  * Takes the output from Object.prototype.toString() which is of the form
- * "[object @@@@@]" and returns "@@@@@".
+ * '[object @@@@@]' and returns '@@@@@'.
  * 
  * @param {*} obj Item to determine the type of
  * @returns {string}
@@ -225,4 +225,4 @@ export {
     areArraysOf,
     isObjectOf,
     areObjectsOf
-}
+};
