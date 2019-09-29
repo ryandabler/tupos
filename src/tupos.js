@@ -137,10 +137,7 @@ const hasInterface = intfc => object => {
  * @param {Object} intfc 
  * @returns {Function}
  */
-const haveInterface = intfc => (...objects) => objects.every(object => {
-    const eInterface = Object.entries(intfc);
-    return eInterface.every(([key, type]) => typeOf(object[key]) === type);
-});
+const haveInterface = intfc => (...objects) => objects.every(hasInterface(intfc));
 
 /**
  * Accepts an object whose values are types and returns a function whose parameter
