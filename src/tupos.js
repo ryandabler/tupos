@@ -204,6 +204,23 @@ const isObjectOf = (...types) => object => Object.values(object).every(value => 
  */
 const areObjectsOf = (...types) => (...objects) => objects.every(isObjectOf(...types));
 
+/**
+ * Accepts a list of types and returns a function which accepts an array whose elements must
+ * be of the specified type declared in their respective positions in the list of types.
+ * @param  {...any} types 
+ * @returns {Function}
+ */
+const isTuple = (...types) => tuple =>
+    tuple.length === types.length && tuple.every((elem, idx) => typeOf(elem) === types[idx]);
+
+/**
+ * Accepts a list of types and returns a function which accepts an arbitrary number of tuples,
+ * all of which it validates against the declared list of types.
+ * @param  {...any} types 
+ * @returns {Function}
+ */
+const areTuples = (...types) => (...tuples) => tuples.every(isTuple(...types));
+
 export {
     typeOf,
     isIterable,
@@ -224,5 +241,7 @@ export {
     isArrayOf,
     areArraysOf,
     isObjectOf,
-    areObjectsOf
+    areObjectsOf,
+    isTuple,
+    areTuples
 };

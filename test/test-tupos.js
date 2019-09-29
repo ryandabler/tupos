@@ -22,7 +22,9 @@ import {
     isArrayOf,
     areArraysOf,
     isObjectOf,
-    areObjectsOf
+    areObjectsOf,
+    isTuple,
+    areTuples
 } from '../src/tupos';
 import types from '../src/constants';
 
@@ -748,6 +750,61 @@ describe('areObjectsOf()', function() {
     it('Should return false', function() {
         const closure = areObjectsOf(..._types);
         const result = closure(...matchingObjects, nonMatchingObject);
+        expect(result).to.be.false;
+    });
+});
+
+describe('isTuple()', function() {
+    const _types = [ types.STRING, types.SYMBOL, types.OBJECT ];
+    const matchingTuple = [ 'abc', Symbol(), { a: 1 } ];
+    const nonMatchingTuples = [
+        [ 'abc' ],
+        [ 'abc', Symbol(), { a: 1 }, 2 ],
+        [ Symbol(), 'abc', { a: 1 } ]
+    ];
+
+    it('Should return a function when called', function() {
+        const result = isTuple(..._types);
+        
+        expect(result).to.be.an.instanceof(Function);
+    });
+
+    it('Should return true', function() {
+        const closure = isTuple(..._types);
+        const result = closure(matchingTuple);
+        expect(result).to.be.true;
+    });
+
+    it('Should return false', function() {
+        const closure = isTuple(..._types);
+        const result = nonMatchingTuples.some(closure);
+        expect(result).to.be.false;
+    });
+});
+
+describe('areTuples()', function() {
+    const _types = [ types.STRING, types.SYMBOL, types.OBJECT ];
+    const matchingTuples = [
+        [ 'abc', Symbol(), { a: 1 } ],
+        [ 'def', Symbol('a'), {} ]
+    ];
+    const nonMatchingTuple = [ 'abc' ];
+
+    it('Should return a function when called', function() {
+        const result = areTuples(..._types);
+        
+        expect(result).to.be.an.instanceof(Function);
+    });
+
+    it('Should return true', function() {
+        const closure = areTuples(..._types);
+        const result = closure(...matchingTuples);
+        expect(result).to.be.true;
+    });
+
+    it('Should return false', function() {
+        const closure = areTuples(..._types);
+        const result = closure(...matchingTuples, nonMatchingTuple);
         expect(result).to.be.false;
     });
 });

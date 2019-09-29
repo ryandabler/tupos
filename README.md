@@ -84,6 +84,8 @@ Tupos also has a number of functions to aid in type-checking:
 | `areArraysOf`      | Works the same as `isArrayOf` except it checks multiple arrays simultaneously |
 | `isObjectOf`       | A higher-order function which accepts a list of types and returns a function which accepts an object and checks that all of its values are of the specified types. Returns `true` or `false` |
 | `areObjectsOf`     | Works the same as `isObjectOf` except it checks multiple objects simultaneously |
+| `isTuple`          | A higher-order function which accepts a list of types and returns a function which accepts an array (tuple) and checks that each element in the array's type is of the respective type in the tuple. Returns `true` or `false` |
+| `areTuples`        | Works the same as `isTuple` except it checks multiple tuples simultanesouly |
 
 ## License
 Tupos is licensed under the MIT license.

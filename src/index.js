@@ -21,7 +21,9 @@ import {
     isArrayOf,
     areArraysOf,
     isObjectOf,
-    areObjectsOf
+    areObjectsOf,
+    isTuple,
+    areTuples
 } from './tupos';
 
 export {
@@ -45,5 +47,7 @@ export {
     isArrayOf,
     areArraysOf,
     isObjectOf,
-    areObjectsOf
+    areObjectsOf,
+    isTuple,
+    areTuples
 };
