@@ -21,10 +21,10 @@ npm install tupos
 Tupos can also be run in a browser environment. The easiest way is to use unpkg and include in a `<script>` tag:
 
 ```html
-<script src="https://unpkg.com/browse/tupos@1.3.0/lib/index.js">
+<script src="https://unpkg.com/browse/tupos@1.4.0/lib/tupos.min.js">
 ```
 
-This script will add a `tupos` key to the `window` object, with the below API exposed through it.
+This script will add a `tupos` key to the `window` object, with the below API exposed through it. Only v1.4.0 or higher are bundled for a browser.
 
 ## API
 ### Constants
