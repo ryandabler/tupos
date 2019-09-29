@@ -6,12 +6,25 @@
 
 Tupos is a type-checking library meant to determine the type of a given object as well as compare objects and types against one another for more complex type management.
 
+## Requirements
+Tupos will work on any environment that supports ES5 or higher.
+
 ## Installation
-To install the Tupos library run
+### Node
+To install the Tupos library in a Node environment, run
 
 ```
 npm install tupos
 ```
+
+### Browser
+Tupos can also be run in a browser environment. The easiest way is to use unpkg and include in a `<script>` tag:
+
+```html
+<script src="https://unpkg.com/browse/tupos@1.3.0/lib/index.js">
+```
+
+This script will add a `tupos` key to the `window` object, with the below API exposed through it.
 
 ## API
 ### Constants
