@@ -1,6 +1,6 @@
 {
   "name": "tupos",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "A type-checking library",
   "main": "lib/tupos.umd.js",
   "module": "lib/tupos.esm.js",
