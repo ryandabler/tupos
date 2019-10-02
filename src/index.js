@@ -7,23 +7,14 @@ import {
     isPrimitive,
     areSameType,
     is,
-    are,
     isOneOf,
-    areOneOf,
     isInstanceOf,
-    areInstancesOf,
     isEnum,
-    areEnum,
     hasInterface,
-    haveInterface,
     hasShape,
-    haveShape,
     isArrayOf,
-    areArraysOf,
     isObjectOf,
-    areObjectsOf,
-    isTuple,
-    areTuples
+    isTuple
 } from './tupos';
 
 export {
@@ -33,21 +24,12 @@ export {
     isPrimitive,
     areSameType,
     is,
-    are,
     isOneOf,
-    areOneOf,
     isInstanceOf,
-    areInstancesOf,
     isEnum,
-    areEnum,
     hasInterface,
-    haveInterface,
     hasShape,
-    haveShape,
     isArrayOf,
-    areArraysOf,
     isObjectOf,
-    areObjectsOf,
-    isTuple,
-    areTuples
+    isTuple
 };

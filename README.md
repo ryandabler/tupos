@@ -82,23 +82,14 @@ Tupos also has a number of functions to aid in type-checking:
 | `isPrimitive`      | Returns `true` or `false` depending on whether the parameter is a primitive JavaScript value (one of `Number`, `String`, `Boolean`, `Null`, `Undefined`, `Symbol`) |
 | `areSameType`      | A variadic function which returns `true` or `false` depending on whether the supplied parameters all have the same type |
 | `is`               | A higher-order function which is called on a given type constant and returns a function which, when called on any parameter, returns `true` or `false` depending on whether that parameter matches the type specified in the closure |
-| `are`              | Works the same as `is` except it checks multiple parameters at once against a particular type |
 | `isOneOf`          | A higher-order variadic function which takes an arbitrary number of types as its parameters and returns a function which takes any parameter and returns `true` or `false` if that parameter's type is any one of the ones specified in its closure |
-| `areOneOf`         | Works that same as `isOneOf` except it checks the types of an arbitrary number of parameters against the list of specified types |
 | `isInstanceOf`     | A higher-order variadic function which takes a list of classes and returns a function which checks whether its parameter is an instance of any of those classes and returns `true` or `false` |
-| `areInstanceOf`    | Works the same as `isInstanceOf` except it checks whether all elements of an arbitrary list are instances any of the specified classes |
 | `isEnum`           | A higher-order variadic function which takes a list of values and returns a function which checks whether its parameter exists in that enumerated list and returns `true` or `false` |
-| `areEnum`          | Works the same as `isEnum` except it checks whether all elements of an arbitrary list exist in the enumerated list |
 | `hasInterface`     | A higher-order function which accepts an object whose values are types and returns a function which accepts an object and checks that it contains at least all the keys in the interface and whose values are of the designated type. Returns `true` or `false` |
-| `haveInterface`    | Works the same as `hasInterface` except it checks multiple objects simultaneously |
 | `hasShape`         | A higher-order function which accepts an object whose values are types and returns a function which accepts an object and checks that it contains exactly the keys in the shape template and whose values are of the designated type. Returns `true` or `false` |
-| `haveShape`        | Works the same as `hasShape` except it checks multiple objects simultaneously |
 | `isArrayOf`        | A higher-order function which accepts a list of types and returns a function which accepts an array and checks that all of its elements are of the specified types. Returns `true` or `false` |
-| `areArraysOf`      | Works the same as `isArrayOf` except it checks multiple arrays simultaneously |
 | `isObjectOf`       | A higher-order function which accepts a list of types and returns a function which accepts an object and checks that all of its values are of the specified types. Returns `true` or `false` |
-| `areObjectsOf`     | Works the same as `isObjectOf` except it checks multiple objects simultaneously |
 | `isTuple`          | A higher-order function which accepts a list of types and returns a function which accepts an array (tuple) and checks that each element in the array's type is of the respective type in the tuple. Returns `true` or `false` |
-| `areTuples`        | Works the same as `isTuple` except it checks multiple tuples simultanesouly |
 
 ## License
 Tupos is licensed under the MIT license.

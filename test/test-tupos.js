@@ -8,23 +8,14 @@ import {
     isPrimitive,
     areSameType,
     is,
-    are,
     isOneOf,
-    areOneOf,
     isInstanceOf,
-    areInstancesOf,
     isEnum,
-    areEnum,
     hasInterface,
-    haveInterface,
     hasShape,
-    haveShape,
     isArrayOf,
-    areArraysOf,
     isObjectOf,
-    areObjectsOf,
-    isTuple,
-    areTuples
+    isTuple
 } from '../src/tupos';
 import types from '../src/constants';
 
@@ -285,36 +276,6 @@ describe('is()', function() {
     });
 });
 
-describe('are()', function() {
-    it('Should return a function when called', function() {
-        const [ type ] = getNTypes(1);
-        const result = are(...type);
-        
-        expect(result).to.be.an.instanceof(Function);
-    });
-
-    it('Should return true', function() {
-        const closures = answers.map(are);
-        
-        closures.forEach((closure, idx) => {
-            const type = typesToTest[idx];
-            expect(closure(type, type)).to.be.true;
-        });
-    });
-
-    it('Should return false', function() {
-        const closures = answers.map(are);
-
-        closures.forEach((closure, idx) => {
-            const type1 = typesToTest[idx];
-            const type2 = typesToTest[idx === 0 ? closures.length - 1 : idx - 1]
-            expect(
-                closure(type1, type2)
-            ).to.be.false;
-        });
-    });
-});
-
 describe('isOneOf()', function() {
     let number = 0;
 
@@ -354,47 +315,6 @@ describe('isOneOf()', function() {
     });
 });
 
-describe('areOneOf()', function() {
-    let number = 0;
-
-    beforeEach(function() {
-        number = Math.floor(Math.random() * 5 + 2);
-    });
-
-    afterEach(function() {
-        number = 0;
-    });
-
-    it('Should return a function when called', function() {
-        const [ types ] = getNTypes(number);
-        const result = areOneOf(...types);
-        
-        expect(result).to.be.an.instanceof(Function);
-    });
-
-    it('Should return true', function() {
-        const [ types, instances ] = getNTypes(number);
-        const closure = areOneOf(...types);
-        const _instances = Array(Math.floor(Math.random() * number + 1))
-            .fill(0)
-            .map(
-                () => instances[ Math.floor(Math.random() * instances.length) ]
-            );
-        expect(closure(..._instances)).to.be.true;
-    });
-
-    it('Should return false', function() {
-        const [ types, , disjointInstances ] = getNTypes(number);
-        const closure = areOneOf(...types);
-        const _disjointInstances = Array(Math.floor(Math.random() * number + 1))
-            .fill(0)
-            .map(
-                () => disjointInstances[ Math.floor(Math.random() * disjointInstances.length) ]
-            );
-        expect(closure(..._disjointInstances)).to.be.false;
-    });
-});
-
 describe('isInstanceOf()', function() {
     class Dummy1 {}
     class Dummy2 {}
@@ -419,30 +339,6 @@ describe('isInstanceOf()', function() {
     });
 });
 
-describe('areInstancesOf()', function() {
-    class Dummy1 {}
-    class Dummy2 {}
-    class Dummy3 {}
-
-    it('Should return a function when called', function() {
-        const result = areInstancesOf(Dummy1, Dummy2);
-        
-        expect(result).to.be.an.instanceof(Function);
-    });
-
-    it('Should return true', function() {
-        const closure = areInstancesOf(Dummy1, Dummy2);
-        var instances = [ Dummy1, Dummy2 ].map(_class => new _class);
-        expect(closure(...instances)).to.be.true;
-    });
-
-    it('Should return false', function() {
-        const closure = areInstancesOf(Dummy1, Dummy2);
-        var instances = [ Dummy1, Dummy2 ].map(_class => new _class);
-        expect(closure(...instances, new Dummy3)).to.be.false;
-    });
-});
-
 describe('isEnum()', function() {
     const values = [1, 'abc', 'def', true];
     const values2 = [2, 'ghi', false];
@@ -462,29 +358,6 @@ describe('isEnum()', function() {
     it('Should return false', function() {
         const closure = isEnum(...values);
         const result = values2.some(closure);
-        expect(result).to.be.false;
-    });
-});
-
-describe('areEnum()', function() {
-    const values = [1, 'abc', 'def', true];
-    const values2 = [2, 'ghi', false];
-
-    it('Should return a function when called', function() {
-        const result = areEnum(...values);
-        
-        expect(result).to.be.an.instanceof(Function);
-    });
-
-    it('Should return true', function() {
-        const closure = areEnum(...values);
-        const result = closure(...values);
-        expect(result).to.be.true;
-    });
-
-    it('Should return false', function() {
-        const closure = areEnum(...values);
-        const result = closure(...values, ...values2);
         expect(result).to.be.false;
     });
 });
@@ -526,43 +399,6 @@ describe('hasInterface()', function() {
     });
 });
 
-describe('haveInterface()', function() {
-    const _interface = {
-        a: types.STRING,
-        b: types.NUMBER,
-        c: types.ARRAY,
-        d: types.OBJECT
-    };
-
-    const doesImplement = [
-        { a: 'abc', b: 123, c: [1, true], d: {} },
-        { a: 'xyz', b: -321, c: [ false, '1' ], d: { key: Symbol() }, e: false }
-    ];
-
-    const doesNotImplement = [
-        { a: 'abc', b: '123', c: [1, true], d: {} },
-        { a: 'xyz', c: [ false, '1' ], d: { key: Symbol() }, e: false }
-    ];
-
-    it('Should return a function when called', function() {
-        const result = haveInterface(_interface);
-        
-        expect(result).to.be.an.instanceof(Function);
-    });
-
-    it('Should return true', function() {
-        const closure = haveInterface(_interface);
-        const result = closure(...doesImplement);
-        expect(result).to.be.true;
-    });
-
-    it('Should return false', function() {
-        const closure = haveInterface(_interface);
-        const result = closure(...doesImplement, doesNotImplement[0]);
-        expect(result).to.be.false;
-    });
-});
-
 describe('hasShape()', function() {
     const shape = {
         a: types.STRING,
@@ -600,42 +436,6 @@ describe('hasShape()', function() {
     });
 });
 
-describe('haveShape()', function() {
-    const shape = {
-        a: types.STRING,
-        b: types.NUMBER,
-        c: types.ARRAY,
-        d: types.OBJECT
-    };
-
-    const isOfShape = [
-        { a: 'abc', b: 123, c: [1, true], d: {} },
-        { a: 'xyz', b: -321, c: ['a', false], d: { key: Symbol('value') } }
-    ];
-
-    const isNotOfShape = [
-        { a: 'abc', b: '123', c: [1, true], d: {} }
-    ];
-
-    it('Should return a function when called', function() {
-        const result = haveShape(shape);
-        
-        expect(result).to.be.an.instanceof(Function);
-    });
-
-    it('Should return true', function() {
-        const closure = haveShape(shape);
-        const result = closure(...isOfShape);
-        expect(result).to.be.true;
-    });
-
-    it('Should return false', function() {
-        const closure = haveShape(shape);
-        const result = closure(...isOfShape, isNotOfShape[0]);
-        expect(result).to.be.false;
-    });
-});
-
 describe('isArrayOf()', function() {
     const _types = [ types.STRING, types.SYMBOL, types.OBJECT ];
     const matchingArrays = [
@@ -664,35 +464,6 @@ describe('isArrayOf()', function() {
     it('Should return false', function() {
         const closure = isArrayOf(..._types);
         const result = nonMatchingArrays.every(closure);
-        expect(result).to.be.false;
-    });
-});
-
-describe('areArraysOf()', function() {
-    const _types = [ types.STRING, types.SYMBOL, types.OBJECT ];
-    const matchingArrays = [
-        [],
-        [ 'abc' ],
-        [ '0', Symbol(), { a: -12 } ],
-        [ Symbol(), { a: -12 } ]
-    ];
-    const nonMatchingArray = [ Symbol(), { a: -12 }, [] ];
-
-    it('Should return a function when called', function() {
-        const result = areArraysOf(..._types);
-        
-        expect(result).to.be.an.instanceof(Function);
-    });
-
-    it('Should return true', function() {
-        const closure = areArraysOf(..._types);
-        const result = closure(...matchingArrays);
-        expect(result).to.be.true;
-    });
-
-    it('Should return false', function() {
-        const closure = areArraysOf(..._types);
-        const result = closure(...matchingArrays, nonMatchingArray);
         expect(result).to.be.false;
     });
 });
@@ -727,33 +498,6 @@ describe('isObjectOf()', function() {
     });
 });
 
-describe('areObjectsOf()', function() {
-    const _types = [ types.STRING, types.SYMBOL, types.OBJECT ];
-    const matchingObjects = [
-        {},
-        { key1: 'abc', key2: Symbol('abc'), key3: { a: [1,2,3] } }
-    ];
-    const nonMatchingObject = { key1: 1 };
-
-    it('Should return a function when called', function() {
-        const result = areObjectsOf(..._types);
-        
-        expect(result).to.be.an.instanceof(Function);
-    });
-
-    it('Should return true', function() {
-        const closure = areObjectsOf(..._types);
-        const result = closure(...matchingObjects);
-        expect(result).to.be.true;
-    });
-
-    it('Should return false', function() {
-        const closure = areObjectsOf(..._types);
-        const result = closure(...matchingObjects, nonMatchingObject);
-        expect(result).to.be.false;
-    });
-});
-
 describe('isTuple()', function() {
     const _types = [ types.STRING, types.SYMBOL, types.OBJECT ];
     const matchingTuple = [ 'abc', Symbol(), { a: 1 } ];
@@ -778,33 +522,6 @@ describe('isTuple()', function() {
     it('Should return false', function() {
         const closure = isTuple(..._types);
         const result = nonMatchingTuples.some(closure);
-        expect(result).to.be.false;
-    });
-});
-
-describe('areTuples()', function() {
-    const _types = [ types.STRING, types.SYMBOL, types.OBJECT ];
-    const matchingTuples = [
-        [ 'abc', Symbol(), { a: 1 } ],
-        [ 'def', Symbol('a'), {} ]
-    ];
-    const nonMatchingTuple = [ 'abc' ];
-
-    it('Should return a function when called', function() {
-        const result = areTuples(..._types);
-        
-        expect(result).to.be.an.instanceof(Function);
-    });
-
-    it('Should return true', function() {
-        const closure = areTuples(..._types);
-        const result = closure(...matchingTuples);
-        expect(result).to.be.true;
-    });
-
-    it('Should return false', function() {
-        const closure = areTuples(..._types);
-        const result = closure(...matchingTuples, nonMatchingTuple);
         expect(result).to.be.false;
     });
 });
