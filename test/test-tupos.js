@@ -307,7 +307,7 @@ describe('isOneOf()', function() {
         const [ types, , disjointInstances ] = getNTypes(number);
         const closure = isOneOf(...types);
 
-        disjointInstances.forEach((instance, idx) => {
+        disjointInstances.forEach(instance => {
             expect(
                 closure(instance)
             ).to.be.false;
