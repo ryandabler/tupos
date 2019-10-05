@@ -22,22 +22,27 @@ describe('is()', function() {
 
         expect(result).to.have.property('for');
     });
-    // TODO: ensure this test returns true in exactly one situation
-    it('Should return true', function() {
-        const closures = answers.map($type => is($type.for));
 
-        closures.forEach((closure, idx) => {
-            expect(closure(typesToTest[idx])).to.be.true;
+    describe('The return function', function() {
+        it('Should return true for exactly one type', function() {
+            const closures = answers.map($type => is($type.for));
+    
+            closures.forEach((closure, idx) => {
+                expect(closure(typesToTest[idx])).to.be.true;
+                expect(
+                    typesToTest.filter((_, _idx) => _idx !== idx).some(closure)
+                ).to.not.be.true;
+            });
         });
-    });
-
-    it('Should return false', function() {
-        const closures = answers.map(is);
-
-        closures.forEach((closure, idx) => {
-            expect(
-                closure(typesToTest[idx === 0 ? closures.length - 1 : idx - 1])
-            ).to.be.false;
+    
+        it('Should return false for all other types', function() {
+            const closures = answers.map($type => is($type.for));
+    
+            closures.forEach((closure, idx) => {
+                expect(
+                    typesToTest.filter((_, _idx) => _idx !== idx).every(type => closure(type) === false)
+                ).to.be.true;
+            });
         });
-    });
+    })
 });
