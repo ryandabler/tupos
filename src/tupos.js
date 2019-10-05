@@ -10,7 +10,9 @@ const {
     $NULL,
     $UNDEFINED,
     $BOOLEAN,
-    $SYMBOL
+    $SYMBOL,
+    $ARRAY,
+    $OBJECT
 } = types;
 
 /**
@@ -95,7 +97,7 @@ const hasShape = shape => object => {
     const eShape = Object.entries(shape);
     const eObject = Object.entries(object);
 
-    return eShape.length === eObject.length
+    return $OBJECT(object) && eShape.length === eObject.length
         && hasInterface(shape)(object);
 };
 
@@ -106,7 +108,7 @@ const hasShape = shape => object => {
  * @returns {Function}
  */
 const isArrayOf = (...$types) =>
-    array => array.every(item => $types.some($typeChecker => $typeChecker(item)));
+    array => $ARRAY(array) && array.every(item => $types.some($typeChecker => $typeChecker(item)));
 
 /**
  * Accepts a list of types and returns a function which accepts an object and makes sure
@@ -114,8 +116,8 @@ const isArrayOf = (...$types) =>
  * @param  {...string} types 
  * @returns {Function}
  */
-const isObjectOf = (...$types) =>
-    object => Object.values(object).every(value => $types.some($typeChecker => $typeChecker(value)));
+const isObjectOf = (...$types) => object =>
+    $OBJECT(object) && Object.values(object).every(value => $types.some($typeChecker => $typeChecker(value)));
 
 /**
  * Accepts a list of types and returns a function which accepts an array whose elements must
@@ -124,7 +126,7 @@ const isObjectOf = (...$types) =>
  * @returns {Function}
  */
 const isTuple = (...$types) => tuple =>
-    tuple.length === $types.length && tuple.every((elem, idx) => $types[idx](elem));
+    $ARRAY(tuple) && tuple.length === $types.length && tuple.every((elem, idx) => $types[idx](elem));
 
 export {
     isIterable,
