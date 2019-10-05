@@ -1,8 +1,8 @@
 'use strict';
 
-import types from './constants';
+import types from './types';
+import { typeOf } from './typeOf';
 import {
-    typeOf,
     isIterable,
     isPrimitive,
     areSameType,
