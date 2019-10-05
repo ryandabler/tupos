@@ -1,4 +1,4 @@
-'se strict';
+'use strict';
 
 const SLICE_START = '[object '.length;
 
