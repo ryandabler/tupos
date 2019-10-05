@@ -9,7 +9,7 @@ Tupos is a functional type-checking library whose goal is to allow for complex u
 Taking inspiration from the likes of TypeScript and the popular `prop-types` NPM package, Tupos exposes a simple API of functions which define the set of built-in data types (numbers, strings, _etc._) as well as common structures like enumerations, tuples, and interfaces (see the full API below), which can be arbitrarily joined together.
 
 ## Requirements
-Tupos will work on any environment that supports ES5 or higher.
+Tupos will work on any environment that supports ES6 or higher.
 
 ## Installation
 ### Node
