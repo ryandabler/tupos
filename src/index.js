@@ -2,11 +2,11 @@
 
 import types from './types';
 import { typeOf } from './typeOf';
+import { is } from './is';
 import {
     isIterable,
     isPrimitive,
     areSameType,
-    is,
     isOneOf,
     isInstanceOf,
     isEnum,
