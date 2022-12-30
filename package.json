@@ -30,7 +30,7 @@
     "coveralls": "^3.0.6",
     "cross-env": "^5.2.1",
     "esm": "^3.2.25",
-    "mocha": "^6.2.0",
+    "mocha": "^10.2.0",
     "nyc": "^14.1.1",
     "rollup": "^1.21.4",
     "rollup-plugin-terser": "^5.1.2"
